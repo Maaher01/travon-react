@@ -1,0 +1,38 @@
+.offer-card {
+    background-position: left center;
+    padding: 50px;
+    border-radius: 20px;
+    overflow: hidden;
+    &__offer {
+        font-family: $body-font;
+        font-size: 48px;
+        margin-top: -0.26em;
+        margin-bottom: 10px;
+        color: $white-color;
+    }
+    &__text {
+        color: $white-color;
+        max-width: 274px;
+        margin-bottom: 35px;
+    }
+    .ot-btn {
+        background-color: $white-color;
+        color: $theme-color;
+        &:hover {
+            color: $white-color
+        }
+    }
+}
+@include lg {
+    .offer-card {
+        &__offer {
+            font-size: 40px;
+        }
+    }
+}
+@include xs {
+    .offer-card {
+        padding: 40px 15px;
+        border-radius: 10px;
+    }
+}

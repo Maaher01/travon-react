@@ -1,0 +1,119 @@
+/* Blog Card ---------------------------------- */
+.blog-card {
+    border-radius: 10px;
+    background-color: $white-color;
+    box-shadow: 0px 2px 15px rgba(22, 25, 33, 0.05);
+    .blog-title {
+        margin-bottom: 25px;
+    }
+    .blog-img {
+        overflow: hidden;
+        border-radius: 10px 10px 0 0;
+        img {
+            width: 100%;
+            transition: 0.4s ease-in-out;
+        }
+    }
+    .blog-content {
+        padding: 35px 40px;
+    }
+    .blog-meta {
+        margin-bottom: 20px;
+    }
+    &:hover {
+        .blog-img {
+            img {
+                transform: scale(1.08);
+            }
+        }
+    }
+}
+
+@include md {
+    .blog-card {
+        .blog-content {
+            padding: 25px 30px;
+        }
+    }
+}
+
+@media (max-width: 360px) {
+    .blog-card {
+        .blog-content {
+            padding: 20px;
+        }
+        .blog-meta {
+            gap: 5px 15px;
+        }
+        .blog-title {
+            font-size: 22px;
+        }
+    }
+}
+
+/* Blog Grid ---------------------------------- */
+.blog-grid {
+    background-color: $white-color;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    &-wrap {
+        &:nth-child(even) {
+            .blog-grid {
+                flex-direction: column-reverse;
+            }
+        }
+    }
+    .blog-title {
+        margin-bottom: 25px;
+    }
+    .blog-img {
+        overflow: hidden;
+        img {
+            width: 100%;
+        }
+    }
+    .blog-content {
+        padding: 62px 52px;
+        background-color: $smoke-color;
+    }
+    .blog-meta {
+        margin-bottom: 20px;
+    }
+    &:hover {
+        .blog-img {
+            img {
+                transform: scale(1.08);
+            }
+        }
+    }
+}
+
+@include xl {
+    .blog-grid {
+        .blog-content {
+            padding: 40px;
+        }
+    }
+}
+
+@include sm {
+    .blog-grid {
+        gap: 0;
+        &-wrap {
+            &:nth-child(even) {
+                .blog-grid {
+                    flex-direction: column;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 360px) {
+    .blog-grid {
+        .blog-content {
+            padding: 40px 20px;
+        }
+    }
+}

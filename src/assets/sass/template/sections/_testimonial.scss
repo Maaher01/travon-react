@@ -1,0 +1,214 @@
+/* Testimonial Card ---------------------------------- */
+.testi-card {
+    background-color: $white-color;
+    padding: 40px;
+    box-shadow: 0px 3px 15px rgba(22, 25, 33, 0.04);
+    border-radius: 6px;
+    position: relative;
+    z-index: 2;
+    &:before {
+        content: '';
+        height: 40px;
+        width: 50px;
+        background-color: $theme-color;
+        position: absolute;
+        bottom: 45px;
+        right: 40px;
+        clip-path: path("M0 0V40L18.75 20V0H0ZM31.25 0V40L50 20V0H31.25Z");
+        z-index: -1;
+        opacity: 0.1;
+    }
+    &__avater {
+        width: 60px;
+        height: 60px;
+        border-radius: 99px;
+        overflow: hidden;
+    }
+    &__profile {
+        display: flex;
+        gap: 15px;
+        align-items: center;
+    }
+    &__name {
+        font-size: 20px;
+        font-family: $title-font;
+        margin-bottom: 4px;
+        font-weight: 700;
+    }
+    &__desig {
+        display: block;
+        font-size: 14px;
+        color: $theme-color;
+    }
+    &__text {
+        margin-top: -0.5em;
+        margin-bottom: 25px;
+    }
+    &__rating {
+        margin-top: -0.22em;
+        margin-bottom: 23px;
+        color: $theme-color;
+        font-size: 14px;
+        i {
+            margin-left: 3px;
+        }
+    }
+}
+.testi-sec {
+    background-size: auto;
+    background-position: bottom 30px center;
+    background-repeat: no-repeat;
+    max-width: 1720px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: $smoke-color;
+    border-radius: 20px;
+    @include md {
+        border-radius: 10px;
+    }
+}
+
+@include vxs {
+    .testi-card {
+        padding: 35px 20px;
+        &:before {
+            right: 20px;
+        }
+    }
+}
+
+/* Testimonial Box ---------------------------------- */
+.testi-box {
+    &-area {
+        position: relative;
+        max-width: 980px;
+        margin-left: auto;
+        margin-right: auto;
+        .slick-arrow {
+            --pos-x: 0;
+            opacity: 1;
+            visibility: visible;
+            transform: scale(1);
+            display: block !important;
+        }
+    }
+    &-tab {
+        .tab-btn {
+            border-radius: 50%;
+            overflow: hidden;
+            position: absolute;
+            cursor: pointer;
+            animation: testiPulse 7s linear infinite;
+            &:nth-child(1) {
+                left: 7%;
+                top: 8%;
+                animation-delay: 1s;
+            }
+            &:nth-child(2) {
+                left: 25%;
+                top: 32%;
+                animation-delay: 2s;
+            }
+            &:nth-child(3) {
+                left: 7%;
+                bottom: 8%;
+                animation-delay: 3s;
+            }
+            &:nth-child(4) {
+                right: 7%;
+                top: 8%;
+                animation-delay: 3s;
+            }
+            &:nth-child(5) {
+                right: 25%;
+                top: 32%;
+                animation-delay: 2s;
+            }
+            &:nth-child(6) {
+                right: 7%;
+                bottom: 8%;
+                animation-delay: 1s;
+            }
+        }
+    }
+    text-align: center;
+    max-width: 730px;
+    margin-left: auto;
+    margin-right: auto;
+    &_text {
+        font-size: 20px;
+        font-style: italic;
+        color: $title-color;
+        line-height: 30px;
+        margin-bottom: 30px;
+    }
+    &_avater {
+        margin-bottom: 20px;
+        img {
+            border-radius: 999px;
+        }
+    }
+    &_review {
+        color: $theme-color;
+        margin-bottom: 25px;
+        i {
+            &:not(:last-child) {
+                margin-left: 3px;
+            }
+        }
+    }
+    &_name {
+        font-size: 20px;
+        margin-bottom: 5px;
+    }
+    &_desig {
+        color: $theme-color;
+        font-size: 14px;
+        display: block;
+        margin-bottom: -0.5em;
+    }
+}
+
+@keyframes testiPulse {
+    0% {
+        transform: scale(0.7) translate(40px, 40px);
+    }
+    50% {
+        transform: scale(1) translate(0, 0);
+    }
+    100% {
+        transform: scale(0.7) translate(40px, 40px);
+    }
+}
+
+@include lg {
+    .testi-box {
+        &-tab {
+            .tab-btn {
+                max-width: 60px;
+            }
+        }
+    }
+}
+
+@include md {
+    .testi-box {
+        max-width: 610px;
+        &_text {
+            font-size: 16px;
+            margin-bottom: 20px;
+            line-height: 26px;
+        }
+        &_review {
+            margin-bottom: 17px;
+        }
+    }
+}
+
+@include sm {
+    .testi-box {
+        &-tab {
+            display: none;
+        }
+    }
+}

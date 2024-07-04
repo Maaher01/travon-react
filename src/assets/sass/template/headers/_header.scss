@@ -1,0 +1,408 @@
+.ot-header {
+    position: relative;
+    z-index: 41;
+    .icon-btn {
+        color: $title-color;
+        background-color: transparent;
+        &:hover {
+            background-color: $theme-color;
+            border-color: $theme-color;
+            color: $white-color;
+        }
+    }
+}
+.sticky-wrapper {
+    transition: 0.4s ease-in-out;
+    &.sticky {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        background-color: $white-color;
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.07);
+        animation: stickyAni 0.4s ease-in-out;
+    }
+}
+
+@keyframes stickyAni {
+    0% {
+        transform: translate3d(0, -40px, 0) scaleY(0.8);
+        opacity: 0.7;
+    }
+    100% {
+        transform: translate3d(0, 0, 0) scaleY(1);
+        opacity: 1;
+    }
+}
+
+.main-menu {
+    a {
+        display: block;
+        position: relative;
+        font-weight: 500;
+        font-size: 14px;
+        color: $title-color;
+        text-transform: uppercase;
+
+        &:hover {
+            color: $theme-color;
+        }
+    }
+
+    > ul {
+        > li {
+            margin: 0 15px;
+            > a {
+                padding: 37px 0;
+            }
+        }
+    }
+
+    ul {
+        margin: 0;
+        padding: 0;
+
+        li {
+            list-style-type: none;
+            display: inline-block;
+            position: relative;
+
+            &.menu-item-has-children {
+                > a {
+                    &:after {
+                        content: "\f078";
+                        position: relative;
+                        font-family: $icon-font;
+                        margin-left: 5px;
+                        top: 0;
+                    }
+                }
+            }
+
+            &:last-child {
+                margin-right: 0 !important;
+            }
+
+            &:first-child {
+                margin-left: 0 !important;
+            }
+
+            &:hover {
+                > ul.sub-menu,
+                ul.mega-menu {
+                    visibility: visible;
+                    opacity: 1;
+                    transform: scaleY(1);
+                    z-index: 9;
+                }
+            }
+        }
+    }
+
+    ul.sub-menu {
+        position: absolute;
+        text-align: left;
+        top: 100%;
+        left: 0;
+        background-color: $white-color;
+        visibility: hidden;
+        min-width: 190px;
+        width: max-content;
+        padding: 7px;
+        left: -14px;
+        opacity: 0;
+        z-index: -1;
+        border: 0;
+        border-radius: 0 0 10px 10px;
+        transform: scaleY(0);
+        transform-origin: top center;
+        transition: all 0.4s ease 0s;
+
+        a {
+            font-size: 16px;
+            line-height: 30px;
+        }
+    }
+
+    ul.sub-menu {
+        padding: 18px 20px;
+        left: -27px;
+
+        li {
+            display: block;
+            margin: 0 0;
+            padding: 0px 9px;
+
+            &.menu-item-has-children {
+                > a:after {
+                    content: "\f105";
+                    float: right;
+                    top: 1px;
+                }
+            }
+
+            a {
+                position: relative;
+                padding-left: 23px;
+                text-transform: capitalize;
+
+                &:before {
+                    content: "\f3de";
+                    position: absolute;
+                    top: 9px;
+                    left: 0;
+                    font-family: $icon-font;
+                    width: 11px;
+                    height: 11px;
+                    text-align: center;
+                    border-radius: 50%;
+                    display: inline-block;
+                    font-size: 0.9em;
+                    line-height: 1;
+                    color: $theme-color;
+                    font-weight: 700;
+                    transform: rotate(-45deg);
+                    // background-color: $white-color;
+                    // box-shadow: inset 0px 2px 4px 0px rgba(#ad8858, 0.4);
+                }
+            }
+
+            ul.sub-menu {
+                left: 100%;
+                right: auto;
+                top: 0;
+                margin: 0 0;
+                margin-left: 20px;
+
+                li {
+                    ul {
+                        left: 100%;
+                        right: auto;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.header-button {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: 15px;
+    .icon-btn {
+        position: relative;
+    }
+    .call-btn {
+        border-left: 1px solid $body-color;
+        padding-left: 30px;
+        margin-left: 20px;
+    }
+}
+
+.header-links {
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+    }
+
+    li {
+        display: inline-block;
+        position: relative;
+        font-size: 16px;
+        font-weight: 400;
+
+        &:not(:last-child) {
+            padding: 0 20px 0 0;
+            margin: 0 17px 0 0;
+
+            &:before {
+                content: "";
+                position: absolute;
+                right: 0;
+                top: 50%;
+                background-color: $body-color;
+                opacity: 0.5;
+                width: 1px;
+                height: 16px;
+                transform: translateY(-50%);
+            }
+        }
+        > i {
+            margin-right: 10px;
+        }
+    }
+    li,
+    span,
+    p,
+    a {
+        font-family: $body-font;
+        color: $body-color;
+    }
+    i {
+        color: $body-color;
+    }
+    b,
+    strong {
+        font-weight: 600;
+    }
+}
+.header-social {
+    .social-title {
+        font-weight: 400;
+        font-size: 16px;
+        display: inline-block;
+        margin: 0 10px 0 0;
+    }
+
+    a {
+        font-size: 14px;
+        display: inline-block;
+        color: $body-color;
+        margin: 0 15px 0 0;
+        
+        &:last-child {
+            margin-right: 0;
+        }
+
+        &:hover {
+            color: $theme-color;
+        }
+    }
+}
+
+.header-logo {
+    padding-top: 16px;
+    padding-bottom: 16px;
+}
+
+/* Header 1 ---------------------------------- */
+.header-layout1 {
+    --main-container: 1640px;
+    .header-top {
+        --body-color: #fff;
+        background-color: $theme-color;
+        padding: 11px 0;
+        position: relative;
+        &:before {
+            content: '';
+            height: 100%;
+            width: 50%;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            background-color: $title-color;
+            clip-path: polygon(0 0, 100% 0, calc(100% - 40px) 100%, 0% 100%);
+        }
+    }
+    .menu-area {
+        position: relative;
+    }
+    .logo-bg {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 100%;
+        width: 24.5%;
+        background-color: $smoke-color2;
+        clip-path: polygon(0 0, calc(100% - 50px) 0%, 100% 100%, 0% 100%);
+    }
+    .header-logo {
+        position: relative;
+        z-index: 3;
+    }
+    .main-menu {
+        margin-left: 140px;
+    }
+}
+
+@include hd {
+    .header-layout1 .logo-bg {
+        width: 29.8%;
+    }
+}
+
+@include xxl {
+    .header-layout1 {
+        .main-menu {
+            margin-left: 30px;
+        }
+        .logo-bg {
+            width: 22%;
+        }
+    }
+}
+
+@include ml {
+    .header-layout1 {
+        .logo-bg {
+            width: 25%;
+        }
+        .main-menu {
+            margin-left: 0;
+        }
+        .header-button {
+            .ot-btn {
+                display: none;
+            }
+        }
+    }
+}
+
+@include xl {
+    .header-layout1 .logo-bg {
+        width: 22%;
+    }
+}
+
+@include lg {
+    .header-layout1 {
+        .logo-bg {
+            width: 30%;
+        }
+    }
+}
+
+@include md {
+    .header-layout1 {
+        .logo-bg {
+            width: 50%;
+        }
+    }
+}
+
+@include xs {
+    .header-layout1 {
+        .header-logo {
+            max-width: 180px;
+        }
+        .logo-bg {
+            width: 58%;
+        }
+    }
+}
+
+@include vxs {
+    .header-layout1 .logo-bg {
+        width: 70%;
+    }
+}
+
+/* Header 2 ---------------------------------- */
+.header-layout2 {
+    --main-container: 1760px;
+}
+@include ml {
+    .header-layout2 {
+        .header-button {
+            .ot-btn {
+                display: none;
+            }
+        }
+        .container {
+            max-width: 100%;
+        }
+    }
+}

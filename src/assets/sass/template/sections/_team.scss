@@ -1,0 +1,320 @@
+/* Team global ---------------------------------- */
+.ot-team {
+    position: relative;
+    .team-img {
+        position: relative;
+        overflow: hidden;
+        img {
+            width: 100%;
+            transition: 0.4s ease-in-out;
+        }
+    }
+    .team-desig {
+        font-size: 14px;
+        display: block;
+        margin-bottom: -0.5em;
+        transition: 0.4s ease-in-out;
+        color: $theme-color;
+    }
+    .team-social {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        gap: 20px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        visibility: hidden;
+        opacity: 0;
+        transition: 0.4s ease-in-out;
+        z-index: 4;
+        a {
+            color: $white-color;
+            &:hover {
+                color: $theme-color;
+            }
+        }
+    }
+    .ot-social {
+        a {
+            --icon-size: 36px;
+            background-color: $white-color;
+            color: $theme-color;
+            &:hover {
+                background-color: $theme-color;
+                color: $white-color;
+            }
+        }
+    }
+    .box-title {
+        margin-bottom: 3px;
+    }
+    &:hover {
+        .team-img {
+            img {
+                transform: scale(1.08);
+            }
+        }
+        .team-social {
+            visibility: visible;
+            opacity: 1;
+        }
+    }
+}
+/* Team Box ---------------------------------- */
+.team-box {
+    position: relative;
+    background-color: $smoke-color;
+    border-radius: 10px;
+    text-align: center;
+    transition: 0.4s ease-in-out;
+    .team-img {
+        border-radius: 10px 10px 0 0;
+    }
+    .ot-social {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        opacity: 0;
+        visibility: hidden;
+        transform: scaleX(0);
+        transition: 0.4s ease-in-out;
+        a {
+            --icon-size: 36px;
+            line-height: 37px;
+            color: $theme-color;
+            background-color: $white-color;
+            border: none;
+            font-size: 14px;
+            &:hover {
+                background-color: $theme-color;
+                color: $white-color;
+            }
+            &:nth-child(2) {
+                margin-right: 30px;
+            }
+            &:nth-child(3) {
+                margin-left: 30px;
+            }
+        }
+    }
+    .team-content {
+        padding: 26px 10px;
+        position: relative;
+        z-index: 2;
+    }
+    .team-social {
+        display: block;
+        top: unset;
+        bottom: 25px;
+        text-align: center;
+        width: 100%;
+        visibility: visible;
+        opacity: 1;
+        .play-btn {
+            cursor: pointer;
+            > i {
+                --icon-size: 36px;
+                line-height: 32px;
+                background-color: $theme-color;
+                color: $white-color;
+                font-size: 16px;
+            }
+            &:before,
+            &:after {
+                background-color: $theme-color;
+            }
+            &:hover {
+                > i {
+                    transform: rotate(45deg);
+                }
+            }
+        }
+        &:hover {
+            .ot-social {
+                visibility: visible;
+                opacity: 1;
+                transform: scaleX(1);
+            }
+        }
+    }
+}
+
+@include xs {
+    .team-box {
+        max-width: 340px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+/* Team Details ---------------------------------- */
+.about-card {
+    &__img {
+        border-radius: 10px;
+        overflow: hidden;
+        img {
+            width: 100%;
+        }
+    }
+    &__box {
+        padding-left: 50px;
+    }
+    &__top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+    &__title {
+        margin-top: -0.3em;
+        margin-bottom: 5px;
+    }
+    &__subtitle {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        &:after {
+            content: '';
+            height: 1px;
+            width: 100%;
+            background-color: $border-color;
+            flex: 1;
+        }
+    }
+    &__desig {
+        color: $theme-color;
+    }
+    .ot-social {
+        a {
+            background-color: $border-color;
+            color: $theme-color;
+            border: none;
+            --icon-size: 30px;
+            font-size: 12px;
+            &:hover {
+                background-color: $theme-color;
+                color: $white-color;
+            }
+            &:not(:last-child) {
+                margin-right: 3px;
+            }
+        }
+    }
+}
+.about-info {
+    &-wrap {
+        display: grid;
+        grid-template-columns: auto auto;
+        gap: 15px;
+    }
+    margin-bottom: 0;
+    i {
+        background-color: $smoke-color2;
+        font-size: 16px;
+        color: $theme-color;
+        height: 40px;
+        width: 40px;
+        line-height: 40px;
+        border-radius: 50%;
+        text-align: center;
+        margin-right: 10px;
+    }
+    strong {
+        font-weight: 500;
+        color: $title-color;
+        margin-right: 10px;
+    }
+    a {
+        color: $body-color;
+        &:hover {
+            color: $theme-color;
+        }
+    }
+}
+.info-title {
+    font-size: 16px;
+    border-bottom: 1px solid $theme-color;
+    width: fit-content;
+    margin-bottom: 10px;
+}
+
+.skill-progress {
+    &-wrap {
+        background-color: #f8f8f8;
+        height: 100%;
+        padding: 40px;
+    }
+    margin-bottom: 21px;
+    &:last-child {
+        margin-bottom: 0;
+    }
+    &_title,
+    .progress-value {
+        margin-top: -0.3em;
+        margin-bottom: 8px;
+        color: $title-color;
+        font-size: 16px;
+        font-weight: 500;
+    }
+    .progress-value {
+        margin-bottom: 0;
+        position: absolute;
+        top: -30px;
+        right: 0;
+    }
+    .progress {
+        background-color: $border-color;
+    }
+}
+
+.border-title {
+    border-bottom: 1px solid $border-color;
+    margin-top: -0.24em;
+    margin-bottom: 25px;
+    padding-bottom: 5px;
+}
+
+@include ml {
+    .about-card {
+        &__box {
+            padding-left: 0;
+        }
+    }
+}
+
+@include lg {
+    .about-card {
+        &__img {
+            margin-bottom: 40px;
+        }
+    }
+}
+
+@include xs {
+    .about-info {
+        &-wrap {
+            grid-template-columns: auto;
+        }
+    }
+    .about-card {
+        &__top {
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+    }
+}
+@media (max-width: 400px) {
+    .skill-progress {
+        &-wrap {
+            padding: 40px 20px;
+        }
+        .progress-bar {
+            position: static;
+        }
+    }
+}

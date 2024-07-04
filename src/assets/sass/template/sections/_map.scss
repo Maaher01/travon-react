@@ -1,0 +1,125 @@
+.world-map {
+    position: relative;
+    .dot {
+        position: absolute;
+        height: 15px;
+        width: 15px;
+        background-color: $theme-color;
+        border-radius: 50%;
+        z-index: 2;
+        cursor: pointer;
+        &:before,
+        &:after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background-color: $theme-color;
+            animation: ripplemap 5s ease-in-out infinite;
+            z-index: -1;
+            border-radius: inherit;
+            transition: all ease 0.4s;
+        }
+        &:after {
+            animation-delay: 2s;
+        }
+
+        .trips {
+            background-color: $title-color;
+            display: inline-block;
+            color: $white-color;
+            border-radius: 5px;
+            font-size: 14px;
+            padding: 0 10px;
+            line-height: 30px;
+            white-space: nowrap;
+            position: absolute;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%) scale(0.5);
+            transform-origin: bottom center;
+            visibility: hidden;
+            opacity: 0;
+            transition: 0.3s ease-in-out;
+            &:hover {
+                color: $theme-color;
+            }
+            &:after {
+                content: '\f0d7';
+                font-family: $icon-font;
+                position: absolute;
+                font-size: 20px;
+                font-weight: 900;
+                line-height: 3px;
+                top: 100%;
+                left: 50%;
+                transform: translateX(-50%);
+                color: $title-color;
+            }
+        }
+        &:hover {
+            .trips {
+                visibility: visible;
+                opacity: 1;
+                transform: translateX(-50%) scale(1);
+            }
+        }
+    }
+}
+.map-1 {
+    margin-left: 60px;
+    img {
+        width: 100%;
+    }
+}
+.process-list {
+    &-wrap {
+        position: relative;
+        &:before {
+            content: '';
+            height: calc(100% - 50px);
+            position: absolute;
+            top: 25px;
+            left: 27px;
+            border-left: 2px dashed $theme-color;
+        }
+    }
+    display: flex;
+    gap: 20px;
+    &:not(:last-child) {
+        margin-bottom: 40px;
+    }
+    &__number {
+        font-size: 24px;
+        font-weight: 700;
+        color: $theme-color;
+        min-width: 56px;
+        height: 56px;
+        line-height: 56px;
+        background-color: $smoke-color2;
+        border-radius: 50%;
+        text-align: center;
+        position: relative;
+        z-index: 3;
+    }
+    &__title {
+        font-size: 20px;
+        line-height: 30px;
+        margin-top: -0.3em;
+        margin-bottom: 13px;
+        text-transform: capitalize;
+    }
+    &__text {
+        font-size: 14px;
+        line-height: 24px;
+        margin-bottom: -0.5em;
+    }
+}
+
+@include xl {
+    .map-1 {
+        margin-left: 0;
+    }
+}

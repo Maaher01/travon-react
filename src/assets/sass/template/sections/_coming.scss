@@ -1,0 +1,326 @@
+/* Coming Soon ---------------------------------- */
+// Header
+.header-coming {
+    --main-container: 1720px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    .header-logo {
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
+    .ot-social {
+        a {
+            background-color: transparent;
+            border: 1px solid;
+            color: $white-color;
+            &:hover {
+                color: $white-color;
+                background-color: $theme-color;
+                border-color: $theme-color;
+            }
+        }
+    }
+}
+
+// Coming
+.coming-soon {
+    text-align: center;
+    padding: 80px 0 80px 0;
+    .coming-title {
+        color: $white-color;
+        font-weight: 900;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+    }
+    .coming-text {
+        color: $white-color;
+        margin-bottom: 25px;
+    }
+    .newsletter-form {
+        max-width: 630px;
+        margin: 0 auto;
+        justify-content: center;
+        .ot-btn {
+            min-width: 160px;
+            border-radius: 0 99px 99px 0;
+            padding: 20.5px 15px;
+            i {
+                margin-left: 6px;
+            }
+        }
+        input {
+            background-color: #0e121d;
+            border: 1px solid rgba($color: #fff, $alpha: 0.5);
+            border-right: none;
+            color: $white-color;
+            border-radius: 99px 0 0 99px;
+            @include inputPlaceholder {
+                color: $white-color;
+            }
+            &:focus {
+                background-color: #0e121d;
+                border-color: $theme-color;
+            }
+        }
+    }
+}
+
+// Clock --------------------------
+.clock {
+    &-wrap {
+        position: relative;
+        max-width: 446px;
+        width: 100%;
+        height: 446px;
+        background-color: rgba($color: #0e121d, $alpha: 0.5);
+        border-radius: 50%;
+        margin: 0 auto 30px auto;
+    }
+    position: absolute;
+    inset: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    border-radius: 50%;
+    &:before,
+    &:after {
+        content: "";
+        position: absolute;
+        @include equal-size(50px);
+        border-radius: 50%;
+        background: #0e121d;
+        border: 15px solid $white-color;
+        z-index: 0;
+    }
+    &:after {
+        border: none;
+        @include equal-size(20px);
+        z-index: 1;
+    }
+    .hour,
+    .minute,
+    .second {
+        position: absolute;
+    }
+    .hr,
+    .mn,
+    .sc {
+        display: flex;
+        justify-content: center;
+        border-radius: 50%;
+    }
+    .hr {
+        @include equal-size(210px);
+        &:before {
+            content: "";
+            position: absolute;
+            width: 10px;
+            height: 145px;
+            background-color: $theme-color;
+            border-radius: 99px;
+            z-index: 3;
+        }
+        &:after {
+            content: "";
+            @include equal-size(18px);
+            background-color: $theme-color;
+            position: absolute;
+            transform: rotate(45deg);
+        }
+    }
+    .mn {
+        @include equal-size(285px);
+        &:before {
+            content: "";
+            position: absolute;
+            width: 8px;
+            height: 187px;
+            background: $theme-color;
+            z-index: 4;
+            border-radius: 99px;
+        }
+        &:after {
+            content: "";
+            @include equal-size(17px);
+            background-color: $theme-color;
+            position: absolute;
+            transform: rotate(45deg) skew(4deg, 4deg);
+        }
+    }
+    .sc {
+        @include equal-size(360px);
+        &:before {
+            content: "";
+            position: absolute;
+            width: 4px;
+            height: 240px;
+            background: $white-color;
+            z-index: 5;
+            border-radius: 99px;
+        }
+    }
+}
+
+// Countdown -------------------------------
+.upcoming-counter {
+    padding: 0;
+    margin: 40px 0 0 0;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    list-style-type: none;
+    .count-number {
+        @include equal-size(110px);
+        line-height: 110px;
+        background-color: $theme-color;
+        color: $white-color;
+        font-size: 48px;
+        font-weight: 900;
+        text-align: center;
+        border-radius: 50%;
+        position: relative;
+        margin: 15px;
+        &:before {
+            content: "";
+            @include equal-size(calc(100% + 30px));
+            border: 5px solid $white-color;
+            position: absolute;
+            left: -15px;
+            top: -15px;
+            border-radius: inherit;
+        }
+    }
+    li {
+        display: block;
+        flex: 1;
+        text-align: center;
+        max-width: 140px;
+    }
+    .count-name {
+        font-size: 18px;
+        font-weight: 600;
+        text-transform: uppercase;
+        color: $white-color;
+        margin-top: 25px;
+        display: block;
+    }
+}
+
+@include md {
+    .header-coming .header-logo {
+        padding-top: 25px;
+        padding-bottom: 25px;
+    }
+}
+
+@include sm {
+    .upcoming-counter {
+        gap: 4px;
+    }
+}
+
+@include xs {
+    .clock {
+        &-wrap {
+            max-width: 100%;
+            height: calc(100vw - 24px);
+        }
+        .hr {
+            @include equal-size(160px);
+            &:before {
+                width: 10px;
+                height: 120px;
+            }
+            &:after {
+                @include equal-size(18px);
+            }
+        }
+        .mn {
+            @include equal-size(160px);
+            &:before {
+                width: 8px;
+                height: 120px;
+            }
+            &:after {
+                @include equal-size(17px);
+            }
+        }
+        .sc {
+            @include equal-size(240px);
+            &:before {
+                width: 4px;
+                height: 160px;
+            }
+        }
+    }
+    .upcoming-counter {
+        flex-wrap: wrap;
+        gap: 10px;
+        .count-number {
+            @include equal-size(80px);
+            line-height: 80px;
+            font-size: 24px;
+            margin: 0;
+            &:before {
+                display: none;
+            }
+        }
+        li {
+            max-width: 80px;
+        }
+        .count-name {
+            font-size: 16px;
+            margin-top: 15px;
+        }
+    }
+}
+
+@include vxs {
+    .header-coming {
+        .header-logo {
+            max-width: 110px;
+        }
+        .ot-social {
+            a {
+                --icon-size: 30px;
+                font-size: 12px;
+                &:not(:last-child) {
+                    margin-right: 2px;
+                }
+            }
+        }
+    }
+    .coming-soon {
+        .newsletter-form {
+            .ot-btn {
+                font-size: 0;
+                min-width: 55px;
+                i {
+                    font-size: 14px;
+                    margin-left: 0;
+                }
+            }
+        }
+    }
+    .upcoming-counter {
+        gap: 5px;
+        .count-number {
+            @include equal-size(70px);
+            line-height: 70px;
+            font-size: 22px;
+            &:before {
+                display: none;
+            }
+        }
+        li {
+            max-width: 70px;
+        }
+        .count-name {
+            font-size: 14px;
+        }
+    }
+}

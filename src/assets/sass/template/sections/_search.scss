@@ -1,0 +1,55 @@
+.search-box {
+    background-color: $white-color;
+    padding: 40px;
+    box-shadow: 0px 6px 100px rgba(21, 29, 53, 0.12);
+    border-radius: 10px;
+    margin-top: -68px;
+    position: relative;
+    z-index: 3;
+}
+.tour-search {
+    display: flex;
+    gap: 5px;
+    width: 100%;
+    .form-select {
+        padding: 0 30px 0 43px;
+        background-color: $white-color;
+        border: 1px solid $border-color;
+        &:focus {
+            border-color: $theme-color;
+        }
+    }
+    .form-group {
+        flex: 275px;
+        > i {
+            right: unset;
+            left: 20px;
+            color: $theme-color;
+        }
+    }
+    .form-btn {
+        width: 120px;
+        .ot-btn {
+            min-width: auto;
+            width: 100%;
+        }
+    }
+}
+
+@include md {
+    .tour-search {
+        flex-wrap: wrap;
+        gap: 16px;
+        .form-group {
+            flex: calc(50% - 8px);
+        }
+    }
+}
+
+@include xs {
+    .tour-search {
+        .form-group {
+            flex: 100%;
+        }
+    }
+}

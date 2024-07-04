@@ -1,0 +1,111 @@
+/* Feature 1 ---------------------------------- */
+.feature-media {
+    &-wrap {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px 20px;
+    }
+    display: flex;
+    gap: 20px;
+    max-width: 324px;
+    &__icon {
+        width: 80px;
+        height: 80px;
+        line-height: 70px;
+        background-color: $smoke-color;
+        border: 5px solid $theme-color;
+        border-radius: 50%;
+        font-size: 30px;
+        color: $theme-color;
+        text-align: center;
+    }
+    &__title {
+        font-size: 20px;
+        margin-bottom: 10px;
+        margin-top: -0.3em;
+    }
+    &__text {
+        margin-bottom: -0.5em;
+        font-size: 14px;
+    }
+}
+
+@include lg {
+    .feature-media-wrap {
+        padding-top: 10px;
+        grid-template-columns: auto auto;
+        justify-content: space-around;
+        gap: 30px 20px;
+    }
+}
+
+@include sm {
+    .feature-media {
+        &-wrap {
+            gap: 40px 20px;
+        }
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+}
+
+@media (max-width: 400px) {
+    .feature-media {
+        &-wrap {
+            grid-template-columns: auto;
+        }
+    }
+}
+
+/* Feature Card ---------------------------------- */
+.feature-card {
+    text-align: center;
+    &__icon {
+        margin-bottom: 20px;
+    }
+    &__title {
+        font-size: 20px;
+    }
+    &__text {
+        margin-bottom: -0.5em;
+    }
+}
+
+/* Feature Skill ---------------------------------- */
+.skill-feature {
+    margin-bottom: 24px;
+    text-align: left;
+    &:last-child {
+        margin-bottom: 0;
+    }
+    &_title,
+    .progress-value {
+        font-size: 16px;
+        font-weight: 500;
+        font-family: $body-font;
+        margin-bottom: 10px;
+        margin-top: -0.2em;
+        color: $title-color;
+    }
+    .progress {
+        position: relative;
+        height: 10px;
+        background-color: $white-color;
+        overflow: visible;
+        box-shadow: 0px 0px 7px rgba(22, 25, 33, 0.05);
+        border-radius: 99px;
+    }
+    .progress-bar {
+        height: 4px;
+        background-color: $theme-color;
+        margin: 3px;
+        border-radius: inherit;
+    }
+    .progress-value {
+        margin-bottom: 0;
+        position: absolute;
+        top: -31px;
+        right: 0;
+    }
+}

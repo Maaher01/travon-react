@@ -1,0 +1,120 @@
+/* Pricing 1 ---------------------------------- */ 
+.available-list {
+    ul {
+        padding: 0;
+        margin: 0;
+        text-align: left;
+        list-style: none;
+    }
+    li {
+        position: relative;
+        margin-bottom: 8px;
+        padding-right: 18px;
+        &:last-child {
+            margin-bottom: 0;
+        }
+        &:after {
+            content: "\f058";
+            font-family: $icon-font;
+            font-weight: 500;
+            color: $theme-color;
+            position: absolute;
+            right: 0;
+            transition: 0.3s ease-in-out;
+        }
+        &.unavailable {
+            &:after {
+                content: '\f057';
+                color: #b3b3b3;
+            }
+        }
+    }
+}
+.price-card {
+    background-color: $white-color;
+    box-shadow: 0px 6px 30px rgba(0, 15, 87, 0.08);
+    text-align: center;
+    padding: 0 60px 40px 60px;
+    &_title {
+        font-size: 24px;
+        width: 230px;
+        text-align: center;
+        margin: 0 auto 27px auto;
+        background-color: $title-color;
+        color: $white-color;
+        padding: 20px 20px 36px 20px;
+        border-radius: 0 0 100% 100% / 0 0 100% 100%;
+    }
+    &_price {
+        .price {
+            color: $theme-color;
+            position: relative;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+        .currency {
+            font-size: 0.6em;
+            position: absolute;
+            top: 3px;
+            right: -22px;
+        }
+        .package-duration {
+            font-size: 16px;
+            font-weight: 600;
+            color: $title-color;
+        }
+    }
+    &_content {
+        border-top: 1px solid $border-color;
+        padding-top: 24px;
+        margin-top: 22px;
+        margin-bottom: 32px;
+    }
+    .ot-btn {
+        background-color: $title-color;
+        &:before,
+        &:after {
+            background-color: $theme-color;
+        }
+    }
+    &.active {
+        .price-card {
+            &_title {
+                background-color: $theme-color;
+            }
+        }
+        .ot-btn {
+            background-color: $theme-color;
+            &:before,
+            &:after {
+                background-color: $title-color;
+            }
+        }
+    }
+}
+
+@include md {
+    .price-card {
+        padding: 0 40px 40px 40px;
+    }
+}
+
+@include sm {
+    .price-card {
+        padding: 0 60px 40px 60px;
+        &_price {
+            .price {
+                font-size: 36px;
+            }
+            .currency {
+                right: -14px;
+                top: 0;
+            }
+        }
+    }
+}
+@include vxs {
+    .price-card {
+        padding: 0 30px 40px 30px;
+    }
+}

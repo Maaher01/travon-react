@@ -1,0 +1,311 @@
+/* Hero Global ---------------------------------- */
+.ot-hero-wrapper {
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
+}
+/* Hero 1 ---------------------------------- */
+.ot-hero-bg {
+    position: absolute;
+    inset: 0;
+    img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+}
+.sub-title {
+    &.hero-subtitle {
+        color: $theme-color;
+        .dots {
+            width: 10px;
+            background-color: $theme-color;
+        }
+        .shape {
+            width: 100px;
+            background-color: $theme-color;
+            &.left {
+                .dots {
+                    left: -18px;
+                }
+                
+            }
+            &.right {
+                .dots {
+                    right: -18px;
+                }
+            }
+        }
+    }
+    
+    
+}
+.hero-title {
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    margin-bottom: 0;
+    letter-spacing: 0.002em;
+    &:last-of-type {
+        margin-bottom: 35px;
+    }
+}
+
+.hero-text {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 35px;
+}
+
+@media (min-width: 1300px) {
+    .hero-title {
+        font-size: 64px;
+    }
+}
+
+@include lg {
+    .hero-text {
+        font-size: 16px;
+    }
+}
+
+@include md {
+    .hero-title {
+        &:last-of-type {
+            margin-bottom: 25px;
+        }
+    }
+    
+    .hero-text {
+        margin-bottom: 25px;
+    }
+    
+}
+
+/* Hero 1 ---------------------------------- */
+.hero-1 {
+    .ot-hero-bg {
+        &:before {
+            content: '';
+            height: 100%;
+            width: 62%;
+            background-image: linear-gradient(90deg, #B4EABB 0%, #B2E3C8 17.06%, #B2DDE0 38.29%, rgba(178, 240, 244, 0.85) 52.45%, rgba(170, 236, 250, 0.7) 64.97%, rgba(172, 229, 240, 0.6) 77.13%, rgba(173, 226, 236, 0.440266) 88.14%, rgba(176, 216, 223, 0) 100%);
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    }
+}
+.hero-style1 {
+    position: relative;
+    z-index: 5;
+    padding: 180px 0 230px 0;
+    max-width: 650px;
+    .hero-text {
+        color: $title-color;
+    }
+}
+
+@include lg {
+    .hero-style1 {
+        max-width: 500px;
+        padding: 140px 0 190px 0;
+    }
+}
+
+@include md {
+    .hero-1 {
+        .ot-hero-bg {
+            &:before {
+                width: 80%;
+            }
+        }
+    }
+    .hero-style1 {
+        padding: 110px 0 170px 0;
+    }
+}
+
+@include xs {
+    .hero-1 {
+        .ot-hero-bg {
+            &:before {
+                width: 100%;
+            }
+        }
+    }
+}
+
+/* Hero 2 ---------------------------------- */
+.hero-2 {
+    max-width: 1760px;
+    margin: 0 auto;
+    border-radius: 20px;
+    .ot-hero-bg {
+        &:before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(100% 177.78% at 100% 50%, rgba(0, 12, 35, 0) 47.05%, rgba(0, 16, 47, 0.63) 47.16%, rgba(0, 7, 20, 0.72) 72.61%, rgba(0, 5, 15, 0.81) 100%);
+        }
+    }
+    .tree-1,
+    .tree-2 {
+        position: absolute;
+        bottom: 0;
+    }
+    .tree-1 {
+        left: 20px;
+    }
+    .tree-2 {
+        left: 40%;
+    }
+    .cloud-1,
+    .cloud-2,
+    .cloud-3 {
+        position: absolute;
+        top: 25px;
+        left: -220px;
+        opacity: 0.3;
+        animation: cloudAni 30s linear infinite;
+    }
+    .cloud-2 {
+        animation-delay: 10s;
+        top: 65px;
+    }
+    .cloud-3 {
+        animation-delay: 20s;
+    }
+}
+
+@keyframes cloudAni {
+    0% {
+        transform: translateX(0);
+        opacity: 0.1;
+    }
+    50% {
+        opacity: 0.3;
+        transform: translateX(500px);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(1200px);
+    }
+}
+
+.hero-style2 {
+    position: relative;
+    z-index: 5;
+    padding: 180px 0 260px 0;
+    max-width: 650px;
+    .hero-title {
+        color: $white-color;
+    }
+    .hero-text {
+        color: #A9AFBF;
+        font-weight: 500;
+    }
+    .hero-subtitle {
+        color: $theme-color;
+        .shape {
+            background-color: $theme-color;
+            .dots {
+                background-color: $theme-color;
+            }
+        }
+    }
+}
+
+@media (max-width: 1780px) {
+    .hero-2 {
+        margin-left: 15px;
+        margin-right: 15px;
+        border-radius: 12px;
+        .ot-hero-bg {
+            &:before {
+                background-image: radial-gradient(100% 150.78% at 106% 50%, rgba(0, 12, 35, 0) 47.05%, rgba(0, 16, 47, 0.63) 47.16%, rgba(0, 7, 20, 0.72) 72.61%, rgba(0, 5, 15, 0.81) 100%);
+            }
+        }
+    }
+}
+
+@include xl {
+    .hero-2 {
+        margin-left: .75rem;
+        margin-right: .75rem;
+        border-radius: 10px;
+    }
+}
+@include lg {
+    .hero-2 {
+        .ot-hero-bg {
+            background-size: 136% 100%;
+            &:before {
+                background-image: radial-gradient(100% 140.78% at 106% 50%, rgba(0, 12, 35, 0) 47.05%, rgba(0, 16, 47, 0.63) 47.16%, rgba(0, 7, 20, 0.72) 72.61%, rgba(0, 5, 15, 0.81) 100%);
+            }
+        }
+        .tree-1,
+        .tree-2 {
+            max-width: 170px;
+            bottom: 25px;
+        }
+    }
+    .hero-style2 {
+        padding: 130px 0 210px 0;
+        max-width: 450px;
+    }
+}
+
+@include md {
+    .hero-2 {
+        .ot-hero-bg {
+            background-size: 155% 100%;
+            &:before {
+                background-image: radial-gradient(100% 140.78% at 115% 50%, rgba(0, 12, 35, 0) 47.05%, rgba(0, 16, 47, 0.63) 47.16%, rgba(0, 7, 20, 0.72) 72.61%, rgba(0, 5, 15, 0.81) 100%);
+            }
+        }
+    }
+}
+
+@include sm {
+    .hero-2 {
+        margin-bottom: 148px;
+        .ot-hero-bg {
+            background-size: cover;
+            &:before {
+                background-image: radial-gradient(100% 140.78% at 160% 50%, rgba(0, 12, 35, 0) 47.05%, rgba(0, 16, 47, 0.63) 47.16%, rgba(0, 7, 20, 0.72) 72.61%, rgba(0, 5, 15, 0.81) 100%);
+            }
+        }
+        .tree-1 {
+            max-width: 140px;
+            bottom: 0px;
+        }
+        .tree-2 {
+            max-width: 140px;
+            left: unset;
+            right: 10px;
+            bottom: -15px;
+        }
+        .cloud-1,
+        .cloud-2,
+        .cloud-3 {
+            max-width: 145px;
+        }
+    }
+    .hero-style2 {
+        padding: 100px 0 150px 0;
+    }
+}
+
+@include xs {
+    .hero-style2 {
+        .sub-title.hero-subtitle {
+            .shape {
+                width: 50px;
+            }
+            .dots {
+                width: 6px;
+                right: -10px;
+            }
+        }
+    }
+}
