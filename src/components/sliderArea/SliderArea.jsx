@@ -1,22 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { AboutUs } from "../aboutUs/aboutUs";
-import CounterUp from "../counterUp/counterUp";
-import TripArea from "../tripArea/tripArea";
-import FeatureArea from "../featureArea/featureArea";
-import CtaArea from "../ctaArea/ctaArea";
-import TourArea from "../tourArea/tourArea";
-import DealArea from "../dealArea/dealArea";
-import HomeVideo from "../homeVideo/homeVideo";
-import Testimonial from "../testimonial/testimonial";
-import NewsUpdate from "../newsUpdate/newsUpdate";
-import SubscriptionArea from "../subscriptionArea/subscriptionArea";
 import axios from "axios";
 import { baseUrl } from "../../api/api";
 
-const Home = () => {
+const SliderArea = () => {
   const [sliderData, setSliderData] = useState([]);
 
   const settings = {
@@ -31,9 +20,18 @@ const Home = () => {
     slidesToScroll: 1,
   };
 
+  const fetchSliderData = useCallback(async () => {
+    try {
+      const response = await axios.get(`${baseUrl}/slider`);
+      setSliderData(response.data);
+    } catch (error) {
+      console.error("Error fetching slider data:", error);
+    }
+  }, []);
+
   useEffect(() => {
     fetchSliderData();
-  });
+  }, [fetchSliderData]);
 
   useEffect(() => {
     if (sliderData.length) {
@@ -46,16 +44,6 @@ const Home = () => {
       });
     }
   }, [sliderData]);
-
-  const fetchSliderData = async () => {
-    try {
-      const response = await axios.get(`${baseUrl}/slider`);
-      const data = await response.data;
-      setSliderData(data);
-    } catch (error) {
-      console.error("Error fetching slider data:", error);
-    }
-  };
 
   return (
     <>
@@ -88,19 +76,8 @@ const Home = () => {
           </Slider>
         </div>
       </div>
-      <AboutUs />
-      <CounterUp />
-      <TripArea />
-      <FeatureArea />
-      <CtaArea />
-      <TourArea />
-      <DealArea />
-      <HomeVideo />
-      <Testimonial />
-      <NewsUpdate />
-      <SubscriptionArea />
     </>
   );
 };
 
-export default Home;
+export default SliderArea;

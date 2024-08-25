@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
-const BreadCumb = ({ title, location }) => {
+const BreadCumb = ({ parent, title, location }) => {
   useEffect(() => {
     const elementsWithDataBgSrc = document.querySelectorAll("[data-bg-src]");
 
@@ -16,7 +16,6 @@ const BreadCumb = ({ title, location }) => {
     <>
       <div
         className="breadcumb-wrapper "
-        //data-bg-src="/src/assets/img/bg/breadcumb-bg.jpg"
         data-bg-src="https://wallpapercave.com/wp/wp4069431.jpg"
       >
         <div className="container">
@@ -24,7 +23,7 @@ const BreadCumb = ({ title, location }) => {
             <h1 className="breadcumb-title">{title}</h1>
             <ul className="breadcumb-menu">
               <li>
-                <Link to="/">Home</Link>
+                <Link to="/">{parent}</Link>
               </li>
               <li>{location}</li>
             </ul>

@@ -1,4 +1,11 @@
+import { useContext } from "react";
+import CategoryContext from "../../context/CategoryContext";
+import FeaturedContext from "../../context/FeaturedContext";
+
 const SideSection = () => {
+  const { categoryComponent, categoryContent } = useContext(CategoryContext);
+  const { featuredComponents } = useContext(FeaturedContext);
+
   return (
     <>
       <div className="col-xxl-4 col-lg-5">
@@ -12,117 +19,39 @@ const SideSection = () => {
             </form>
           </div>
           <div className="widget widget_categories">
-            <h3 className="widget_title">Tour Categories</h3>
+            <h3 className="widget_title">{categoryContent.heading}</h3>
             <ul>
-              <li>
-                <a href="blog.html">Hill Tracking(8)</a>
-              </li>
-              <li>
-                <a href="blog.html">Adventure(5)</a>
-              </li>
-              <li>
-                <a href="blog.html">Village Beauty(6)</a>
-              </li>
-              <li>
-                <a href="blog.html">Night View(8)</a>
-              </li>
-              <li>
-                <a href="blog.html">Religious Place(7)</a>
-              </li>
-              <li>
-                <a href="blog.html">Lake View(3)</a>
-              </li>
-              <li>
-                <a href="blog.html">Sea Area(5)</a>
-              </li>
-              <li>
-                <a href="blog.html">Resourt(4)</a>
-              </li>
+              {categoryComponent?.map((comp, index) => (
+                <li key={index}>
+                  <a>
+                    {comp.title} ({comp.sub_title})
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
           <div className="widget">
             <h3 className="widget_title">Last Minute Deals</h3>
             <div className="recent-post-wrap">
-              <div className="recent-post">
-                <div className="media-img">
-                  <a href="blog-details.html">
-                    <img
-                      src="/src/assets/img/trip/recent-tour-1-1.jpg"
-                      alt="Blog Image"
-                    />
-                  </a>
-                </div>
-                <div className="media-body">
-                  <h4 className="post-title">
-                    <a className="text-inherit" href="blog-details.html">
-                      Brooklyn Christmas Lights
+              {featuredComponents?.map((comp, index) => (
+                <div className="recent-post" key={index}>
+                  <div className="media-img">
+                    <a href="blog-details.html">
+                      <img src={comp.url} alt="Blog Image" />
                     </a>
-                  </h4>
-                  <span className="tour-price">
-                    From <span className="price">250$</span>
-                  </span>
+                  </div>
+                  <div className="media-body">
+                    <h4 className="post-title">
+                      <a className="text-inherit" href="blog-details.html">
+                        {comp.title}
+                      </a>
+                    </h4>
+                    <span className="tour-price">
+                      From <span className="price">${comp.sub_heading}</span>
+                    </span>
+                  </div>
                 </div>
-              </div>
-              <div className="recent-post">
-                <div className="media-img">
-                  <a href="blog-details.html">
-                    <img
-                      src="/src/assets/img/trip/recent-tour-1-2.jpg"
-                      alt="Blog Image"
-                    />
-                  </a>
-                </div>
-                <div className="media-body">
-                  <h4 className="post-title">
-                    <a className="text-inherit" href="blog-details.html">
-                      Java &amp; Bali One Life Adventure
-                    </a>
-                  </h4>
-                  <span className="tour-price">
-                    From <span className="price">250$</span>
-                  </span>
-                </div>
-              </div>
-              <div className="recent-post">
-                <div className="media-img">
-                  <a href="blog-details.html">
-                    <img
-                      src="/src/assets/img/trip/recent-tour-1-3.jpg"
-                      alt="Blog Image"
-                    />
-                  </a>
-                </div>
-                <div className="media-body">
-                  <h4 className="post-title">
-                    <a className="text-inherit" href="blog-details.html">
-                      Places To Travel In November
-                    </a>
-                  </h4>
-                  <span className="tour-price">
-                    From <span className="price">250$</span>
-                  </span>
-                </div>
-              </div>
-              <div className="recent-post">
-                <div className="media-img">
-                  <a href="blog-details.html">
-                    <img
-                      src="/src/assets/img/trip/recent-tour-1-3.jpg"
-                      alt="Blog Image"
-                    />
-                  </a>
-                </div>
-                <div className="media-body">
-                  <h4 className="post-title">
-                    <a className="text-inherit" href="blog-details.html">
-                      Pak Nam Chumphon Town Tour
-                    </a>
-                  </h4>
-                  <span className="tour-price">
-                    From <span className="price">250$</span>
-                  </span>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
           <div className="widget widget_banner">

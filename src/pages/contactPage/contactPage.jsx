@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-// import { Link } from "react-router-dom";
 import SubscriptionArea from "../../components/subscriptionArea/subscriptionArea";
 import BreadCumb from "../../components/breadcumb/breadcumb";
 import ContactArea from "../../components/contactArea/contactArea";
@@ -18,21 +17,12 @@ const ContactPage = () => {
 
   return (
     <>
-      <BreadCumb location={"Contact Us"} />
-
-      {/* Quote Area   */}
-
+      <BreadCumb parent={"Home"} location={"Contact Us"} title={"Contact Us"} />
       <div className="space">
         <div className="container">
           <div className="row gy-40">
             <div className="col-xl-5">
               <div className="contact-info-wrap">
-                <div className="shape-img">
-                  <img
-                    src="/src/assets/img/shape/contact_shape.png"
-                    alt="shape"
-                  />
-                </div>
                 <h3 className="border-title2">Contact Info</h3>
                 <div className="contact-info-box">
                   <div className="contact-info">
@@ -87,11 +77,7 @@ const ContactPage = () => {
           </div>
         </div>
       </div>
-
-      {/* Contact Area   */}
-
       <ContactArea />
-
       <SubscriptionArea />
     </>
   );

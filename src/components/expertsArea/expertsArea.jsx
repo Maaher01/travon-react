@@ -1,16 +1,30 @@
-import BreadCumb from "../../components/breadcumb/breadcumb";
-import SubscriptionArea from "../../components/subscriptionArea/subscriptionArea";
-import { Link } from "react-router-dom";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { baseUrl } from "../../api/api";
+import { Link } from "react-router-dom";
 
-const TeamPage = () => {
+const ExpertsArea = () => {
+  const [expertsContent, setExpertsContent] = useState([]);
   const [expertsComponent, setExpertsComponent] = useState([]);
 
   useEffect(() => {
+    fetchExpertsContent();
     fetchExpertsComponents();
   }, []);
+
+  const fetchExpertsContent = async () => {
+    try {
+      const response = await axios.get(`${baseUrl}/content`);
+      const data = await response.data;
+      const expertsContent = data.filter((content) => content.id === 23);
+      setExpertsContent(expertsContent);
+    } catch (error) {
+      console.error("Error fetching company data:", error);
+    }
+  };
 
   const fetchExpertsComponents = async () => {
     try {
@@ -25,14 +39,38 @@ const TeamPage = () => {
     }
   };
 
+  const settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    autoplaySpeed: 3000,
+    autoplay: true,
+    pauseOnHover: false,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+  };
+
   return (
-    <>
-      <BreadCumb parent={"Home"} location={"Our Team"} title={"Our Team"} />
-      <section className="space-top space-extra-bottom">
-        <div className="container">
-          <div className="row">
+    <section className="space" id="team-sec">
+      <div className="container">
+        {expertsContent?.map((content, index) => (
+          <div className="title-area text-center" key={index}>
+            <span className="sub-title justify-content-center">
+              <span className="shape left">
+                <span className="dots" />
+              </span>
+              {content.sub_heading}
+              <span className="shape right">
+                <span className="dots" />
+              </span>
+            </span>
+            <h2 className="sec-title">{content.heading}</h2>
+          </div>
+        ))}
+        <div className="row slider-shadow ot-carousel">
+          <Slider {...settings}>
             {expertsComponent?.map((comp, index) => (
-              <div className="col-md-6 col-lg-4 col-xl-3 mb-30" key={index}>
+              <div className="col-md-6 col-lg-4 col-xl-3 p-3" key={index}>
                 <div className="ot-team team-box">
                   <div className="team-img">
                     <img src={comp.url} alt="Team" />
@@ -65,13 +103,11 @@ const TeamPage = () => {
                 </div>
               </div>
             ))}
-          </div>
+          </Slider>
         </div>
-      </section>
-
-      <SubscriptionArea />
-    </>
+      </div>
+    </section>
   );
 };
 
-export default TeamPage;
+export default ExpertsArea;

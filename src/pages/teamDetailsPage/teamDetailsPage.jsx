@@ -1,11 +1,43 @@
 import BreadCumb from "../../components/breadcumb/breadcumb";
 import ContactArea from "../../components/contactArea/contactArea";
 import SubscriptionArea from "../../components/subscriptionArea/subscriptionArea";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { baseUrl } from "../../api/api";
+import { useParams, useNavigate } from "react-router-dom";
+import DOMPurify from "dompurify";
 
 const TeamDetailsPage = () => {
+  const navigate = useNavigate();
+  const { id } = useParams();
+
+  const [teamComponent, setTeamComponent] = useState([]);
+
+  useEffect(() => {
+    fetchTeamComponent(id);
+  }, [id]);
+
+  const fetchTeamComponent = async (id) => {
+    try {
+      const response = await axios.get(`${baseUrl}/component/${id}`);
+      const teamComponent = await response.data;
+      setTeamComponent(teamComponent);
+    } catch (error) {
+      console.error("Error fetching company data:", error);
+    }
+  };
+
+  const sanitizeContent = (content) => {
+    return DOMPurify.sanitize(content, { ALLOWED_TAGS: [] });
+  };
+
   return (
     <>
-      <BreadCumb location={" Team Details"} title={"Team Details"} />
+      <BreadCumb
+        parent={"Our Team"}
+        location={teamComponent.title}
+        title={teamComponent.title}
+      />
 
       <section className="space">
         <div className="container">
@@ -15,7 +47,7 @@ const TeamDetailsPage = () => {
                 <div className="about-card__img">
                   <img
                     className="w-100"
-                    src="/src/assets/img/team/team_details.jpg"
+                    src={teamComponent.url}
                     alt="team image"
                   />
                 </div>
@@ -24,7 +56,9 @@ const TeamDetailsPage = () => {
                 <div className="about-card__box">
                   <div className="about-card__top">
                     <div>
-                      <h2 className="about-card__title">Michel Marsh</h2>
+                      <h2 className="about-card__title">
+                        {teamComponent.title}
+                      </h2>
                       <span className="about-card__desig">
                         Switzerland Guide
                       </span>

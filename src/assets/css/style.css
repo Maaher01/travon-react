@@ -4198,7 +4198,7 @@ a.text-theme:hover,
 }
 
 .main-menu ul li.menu-item-has-children > a:after {
-  content: "\f078";
+  /* content: "\f078"; */
   position: relative;
   font-family: var(--icon-font);
   margin-left: 5px;
@@ -5919,7 +5919,7 @@ ul.comment-list .ot-comment-item:last-child > .ot-post-comment {
 }
 
 ul.comment-list .ot-comment-item:first-child > .ot-post-comment {
-  padding-bottom: 30px;
+  padding-bottom: 8px;
   border-bottom: 1px solid var(--border-color);
 }
 

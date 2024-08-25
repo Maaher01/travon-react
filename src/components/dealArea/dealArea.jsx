@@ -1,7 +1,11 @@
 import Slider from "react-slick";
-
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { baseUrl } from "../../api/api";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import DOMPurify from "dompurify";
+import { Link } from "react-router-dom";
 
 const DealArea = () => {
   const settings = {
@@ -15,6 +19,42 @@ const DealArea = () => {
     slidesToScroll: 1,
   };
 
+  const [dealContent, setDealContent] = useState([]);
+  const [dealComponent, setDealComponent] = useState([]);
+
+  useEffect(() => {
+    fetchDealContent();
+    fetchDealComponents();
+  }, []);
+
+  const fetchDealContent = async () => {
+    try {
+      const response = await axios.get(`${baseUrl}/content`);
+      const data = await response.data;
+      const dealContent = data.filter((content) => content.id === 21);
+      setDealContent(dealContent);
+    } catch (error) {
+      console.error("Error fetching company data:", error);
+    }
+  };
+
+  const fetchDealComponents = async () => {
+    try {
+      const response = await axios.get(`${baseUrl}/component`);
+      const data = await response.data;
+      const dealComponents = data.filter(
+        (component) => component.content === "21"
+      );
+      setDealComponent(dealComponents);
+    } catch (error) {
+      console.error("Error fetching company data:", error);
+    }
+  };
+
+  const sanitizeContent = (content) => {
+    return DOMPurify.sanitize(content, { ALLOWED_TAGS: [] });
+  };
+
   return (
     <>
       <section
@@ -24,20 +64,20 @@ const DealArea = () => {
         <div className="container">
           <div className="row text-center text-lg-start justify-content-lg-between justify-content-center align-items-end">
             <div className="col-lg-8 mb-n2 mb-lg-0">
-              <div className="title-area">
-                <span className="sub-title justify-content-center justify-content-lg-start">
-                  <span className="shape left d-inline-block d-lg-none">
-                    <span className="dots" />
+              {dealContent?.map((content, index) => (
+                <div className="title-area" key={index}>
+                  <span className="sub-title justify-content-center justify-content-lg-start">
+                    <span className="shape left d-inline-block d-lg-none">
+                      <span className="dots" />
+                    </span>
+                    {content.sub_heading}
+                    <span className="shape right">
+                      <span className="dots" />
+                    </span>
                   </span>
-                  Deals &amp; Offers
-                  <span className="shape right">
-                    <span className="dots" />
-                  </span>
-                </span>
-                <h2 className="sec-title text-white">
-                  Last Minute Amazing Deals
-                </h2>
-              </div>
+                  <h2 className="sec-title">{content.heading}</h2>
+                </div>
+              ))}
             </div>
             <div className="col-auto">
               <div className="sec-btn">
@@ -59,166 +99,40 @@ const DealArea = () => {
             </div>
           </div>
         </div>
-        <div
-          className="row gx-0 ot-carousel"
-          id="dealSlide1"
-          //   data-slide-show={4}
-          //   data-ml-slide-show={3}
-          //   data-lg-slide-show={3}
-          //   data-md-slide-show={2}
-          //   data-sm-slide-show={1}
-        >
+        <div className="row gx-0 ot-carousel" id="dealSlide1">
           <Slider {...settings}>
-            <div className="col-xl-3 col-lg-4 col-md-6">
-              <div className="tour-offer">
-                <div className="tour-offer__img">
-                  <img
-                    src="/src/assets/img/trip/tour_2_1.jpg"
-                    alt="Tour Image"
-                  />
-                  <span className="tour-offer__tag">40% Off</span>
-                </div>
-                <div className="tour-offer__content">
-                  <div className="tour-offer__top">
-                    <div>
-                      <h3 className="tour-offer__title box-title">
-                        <a href="tour-details.html">Maldivs Beach</a>
-                      </h3>
-                      <span className="tour-offer__subtitle">
-                        Exploring Maldivs
-                      </span>
-                    </div>
-                    <span className="tour-offer__price">
-                      <span className="price">$250</span>
+            {dealComponent?.map((comp, index) => (
+              <div className="col-xl-3 col-lg-4 col-md-6" key={index}>
+                <div className="tour-offer">
+                  <div className="tour-offer__img">
+                    <img src={comp.url} alt="Tour Image" />
+                    <span className="tour-offer__tag">
+                      {comp.sub_heading} OFF
                     </span>
                   </div>
-                  <p className="tour-offer__text">
-                    Professionally optimize mission-critical networks rather
-                    than resource maximizing ideas globally.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="col-xl-3 col-lg-4 col-md-6">
-              <div className="tour-offer">
-                <div className="tour-offer__img">
-                  <img
-                    src="/src/assets/img/trip/tour_2_2.jpg"
-                    alt="Tour Image"
-                  />
-                  <span className="tour-offer__tag">30% Off</span>
-                </div>
-                <div className="tour-offer__content">
-                  <div className="tour-offer__top">
-                    <div>
-                      <h3 className="tour-offer__title box-title">
-                        <a href="tour-details.html">Seychelles</a>
-                      </h3>
-                      <span className="tour-offer__subtitle">
-                        Enjoy Seychelles
+                  <div className="tour-offer__content">
+                    <div className="tour-offer__top">
+                      <div>
+                        <h3 className="tour-offer__title box-title">
+                          <Link to={`/package-details/${comp.id}`}>
+                            {comp.title}
+                          </Link>
+                        </h3>
+                        <span className="tour-offer__subtitle">
+                          {comp.sub_title}
+                        </span>
+                      </div>
+                      <span className="tour-offer__price">
+                        <span className="price">${comp.heading}</span>
                       </span>
                     </div>
-                    <span className="tour-offer__price">
-                      <span className="price">$150</span>
-                    </span>
+                    <p className="tour-offer__text">
+                      {sanitizeContent(comp.description)}
+                    </p>
                   </div>
-                  <p className="tour-offer__text">
-                    Professionally optimize mission-critical networks rather
-                    than resource maximizing ideas globally.
-                  </p>
                 </div>
               </div>
-            </div>
-            <div className="col-xl-3 col-lg-4 col-md-6">
-              <div className="tour-offer">
-                <div className="tour-offer__img">
-                  <img
-                    src="/src/assets/img/trip/tour_2_3.jpg"
-                    alt="Tour Image"
-                  />
-                  <span className="tour-offer__tag">25% Off</span>
-                </div>
-                <div className="tour-offer__content">
-                  <div className="tour-offer__top">
-                    <div>
-                      <h3 className="tour-offer__title box-title">
-                        <a href="tour-details.html">Adventure Mountain</a>
-                      </h3>
-                      <span className="tour-offer__subtitle">
-                        Mountain Iceland
-                      </span>
-                    </div>
-                    <span className="tour-offer__price">
-                      <span className="price">$250</span>
-                    </span>
-                  </div>
-                  <p className="tour-offer__text">
-                    Professionally optimize mission-critical networks rather
-                    than resource maximizing ideas globally.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="col-xl-3 col-lg-4 col-md-6">
-              <div className="tour-offer">
-                <div className="tour-offer__img">
-                  <img
-                    src="/src/assets/img/trip/tour_2_4.jpg"
-                    alt="Tour Image"
-                  />
-                  <span className="tour-offer__tag">30% Off</span>
-                </div>
-                <div className="tour-offer__content">
-                  <div className="tour-offer__top">
-                    <div>
-                      <h3 className="tour-offer__title box-title">
-                        <a href="tour-details.html">Adventures</a>
-                      </h3>
-                      <span className="tour-offer__subtitle">
-                        Explore Adventures
-                      </span>
-                    </div>
-                    <span className="tour-offer__price">
-                      <span className="price">$350</span>
-                    </span>
-                  </div>
-                  <p className="tour-offer__text">
-                    Professionally optimize mission-critical networks rather
-                    than resource maximizing ideas globally.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="col-xl-3 col-lg-4 col-md-6">
-              <div className="tour-offer">
-                <div className="tour-offer__img">
-                  <img
-                    src="/src/assets/img/trip/tour_2_5.jpg"
-                    alt="Tour Image"
-                  />
-                  <span className="tour-offer__tag">45% Off</span>
-                </div>
-                <div className="tour-offer__content">
-                  <div className="tour-offer__top">
-                    <div>
-                      <h3 className="tour-offer__title box-title">
-                        <a href="tour-details.html">Night City</a>
-                      </h3>
-                      <span className="tour-offer__subtitle">
-                        City Night Beauty
-                      </span>
-                    </div>
-                    <span className="tour-offer__price">
-                      <span className="price">$200</span>
-                    </span>
-                  </div>
-                  <p className="tour-offer__text">
-                    Professionally optimize mission-critical networks rather
-                    than resource maximizing ideas globally.
-                  </p>
-                </div>
-              </div>
-            </div>
+            ))}
           </Slider>
         </div>
       </section>

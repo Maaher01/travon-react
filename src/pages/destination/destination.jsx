@@ -1,17 +1,44 @@
 import BreadCumb from "../../components/breadcumb/breadcumb";
 import SubscriptionArea from "../../components/subscriptionArea/subscriptionArea";
+import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { baseUrl } from "../../api/api";
 
 const Destination = () => {
+  const [destinationComponent, setDestinationComponent] = useState([]);
+
+  useEffect(() => {
+    fetchDestinationComponents();
+  }, []);
+
+  const fetchDestinationComponents = async () => {
+    try {
+      const response = await axios.get(`${baseUrl}/component`);
+      const data = await response.data;
+      const destinationComponents = data.filter(
+        (component) => component.content === "19"
+      );
+      setDestinationComponent(destinationComponents);
+    } catch (error) {
+      console.error("Error fetching company data:", error);
+    }
+  };
+
   return (
     <>
-      <BreadCumb location={"Destination"} />
+      <BreadCumb
+        parent={"Home"}
+        location={"Destinations"}
+        title={"Destinations"}
+      />
 
       <section className="space-top space-extra-bottom">
         <div className="container">
           <div className="dest-sort-bar">
             <div className="row gy-3 align-items-center justify-content-between">
               <div className="col-sm-auto">
-                <p className="result">Showing 8 out of 24 destination</p>
+                <p className="result">Showing 8 out of 24 destinations</p>
               </div>
               <div className="col-sm-auto">
                 <form className="tour-ordering" method="get">
@@ -40,142 +67,26 @@ const Destination = () => {
             </div>
           </div>
           <div className="row">
-            <div className="col-xl-3 col-lg-4 col-md-6 mb-35">
-              <div className="trip-box">
-                <div className="trip-box__img">
-                  <img
-                    src="/src/assets/img/trip/dest_2_1.jpg"
-                    alt="Trip image"
-                  />
-                </div>
-                <div className="trip-box__content">
-                  <h2 className="trip-box__title box-title">
-                    <i className="fas fa-location-dot" />
-                    <a href="destination-details.html">Switzerland</a>
-                  </h2>
-                  <span className="trip-box__count">6+ Trips</span>
-                </div>
-              </div>
-            </div>
-            <div className="col-xl-3 col-lg-4 col-md-6 mb-35">
-              <div className="trip-box">
-                <div className="trip-box__img">
-                  <img
-                    src="/src/assets/img/trip/dest_2_2.jpg"
-                    alt="Trip image"
-                  />
-                </div>
-                <div className="trip-box__content">
-                  <h2 className="trip-box__title box-title">
-                    <i className="fas fa-location-dot" />
-                    <a href="destination-details.html">Barcelona</a>
-                  </h2>
-                  <span className="trip-box__count">8+ Trips</span>
+            {destinationComponent?.map((comp, index) => (
+              <div className="col-xl-3 col-lg-4 col-md-6 mb-35" key={index}>
+                <div className="trip-box">
+                  <div className="trip-box__img">
+                    <img src={comp.url} alt="Trip image" />
+                  </div>
+                  <div className="trip-box__content">
+                    <h2 className="trip-box__title box-title">
+                      <i className="fas fa-location-dot" />
+                      <Link to={`/destination-details/${comp.id}`}>
+                        {comp.title}
+                      </Link>
+                    </h2>
+                    <span className="trip-box__count">
+                      {comp.sub_title}+ Trips
+                    </span>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="col-xl-3 col-lg-4 col-md-6 mb-35">
-              <div className="trip-box">
-                <div className="trip-box__img">
-                  <img
-                    src="/src/assets/img/trip/dest_2_3.jpg"
-                    alt="Trip image"
-                  />
-                </div>
-                <div className="trip-box__content">
-                  <h2 className="trip-box__title box-title">
-                    <i className="fas fa-location-dot" />
-                    <a href="destination-details.html">Amsterdam</a>
-                  </h2>
-                  <span className="trip-box__count">6+ Trips</span>
-                </div>
-              </div>
-            </div>
-            <div className="col-xl-3 col-lg-4 col-md-6 mb-35">
-              <div className="trip-box">
-                <div className="trip-box__img">
-                  <img
-                    src="/src/assets/img/trip/dest_2_4.jpg"
-                    alt="Trip image"
-                  />
-                </div>
-                <div className="trip-box__content">
-                  <h2 className="trip-box__title box-title">
-                    <i className="fas fa-location-dot" />
-                    <a href="destination-details.html">Budapest City</a>
-                  </h2>
-                  <span className="trip-box__count">5+ Trips</span>
-                </div>
-              </div>
-            </div>
-            <div className="col-xl-3 col-lg-4 col-md-6 mb-35">
-              <div className="trip-box">
-                <div className="trip-box__img">
-                  <img
-                    src="/src/assets/img/trip/dest_2_5.jpg"
-                    alt="Trip image"
-                  />
-                </div>
-                <div className="trip-box__content">
-                  <h2 className="trip-box__title box-title">
-                    <i className="fas fa-location-dot" />
-                    <a href="destination-details.html">Maldives</a>
-                  </h2>
-                  <span className="trip-box__count">7+ Trips</span>
-                </div>
-              </div>
-            </div>
-            <div className="col-xl-3 col-lg-4 col-md-6 mb-35">
-              <div className="trip-box">
-                <div className="trip-box__img">
-                  <img
-                    src="/src/assets/img/trip/dest_2_6.jpg"
-                    alt="Trip image"
-                  />
-                </div>
-                <div className="trip-box__content">
-                  <h2 className="trip-box__title box-title">
-                    <i className="fas fa-location-dot" />
-                    <a href="destination-details.html">Indonesia</a>
-                  </h2>
-                  <span className="trip-box__count">6+ Trips</span>
-                </div>
-              </div>
-            </div>
-            <div className="col-xl-3 col-lg-4 col-md-6 mb-35">
-              <div className="trip-box">
-                <div className="trip-box__img">
-                  <img
-                    src="/src/assets/img/trip/dest_2_7.jpg"
-                    alt="Trip image"
-                  />
-                </div>
-                <div className="trip-box__content">
-                  <h2 className="trip-box__title box-title">
-                    <i className="fas fa-location-dot" />
-                    <a href="destination-details.html">Bangkok</a>
-                  </h2>
-                  <span className="trip-box__count">5+ Trips</span>
-                </div>
-              </div>
-            </div>
-            <div className="col-xl-3 col-lg-4 col-md-6 mb-35">
-              <div className="trip-box">
-                <div className="trip-box__img">
-                  <img
-                    src="/src/assets/img/trip/dest_2_8.jpg"
-                    alt="Trip image"
-                  />
-                </div>
-                <div className="trip-box__content">
-                  <h2 className="trip-box__title box-title">
-                    <i className="fas fa-location-dot" />
-                    <a href="destination-details.html">Nepal</a>
-                  </h2>
-                  <span className="trip-box__count">7+ Trips</span>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
           <div className="ot-pagination mt-3 text-center">
             <ul>

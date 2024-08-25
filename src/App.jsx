@@ -1,9 +1,11 @@
 import { useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import "./App.css";
-import Navbar from "./components/navbar/navbar";
-import FooterArea from "./components/footerArea/footerArea";
-import Home from "./components/home/home";
+import { MenuDataProvider } from "./context/MenuContext";
+import { CompanyDataProvider } from "./context/CompanyContext";
+import { SocialDataProvider } from "./context/SocialContext";
+import { GalleryDataProvider } from "./context/GalleryContext";
+import Home from "./pages/home/home";
 import ContactPage from "./pages/contactPage/contactPage";
 import TeamPage from "./pages/teamPage/teamPage";
 import TeamDetailsPage from "./pages/teamDetailsPage/teamDetailsPage";
@@ -16,6 +18,9 @@ import BlogDetailsPage from "./pages/blogDetailsPage/blogDetailsPage";
 import AboutPage from "./pages/aboutPage/aboutPage";
 import GalleryPage from "./pages/galleryPage/galleryPage";
 import Error from "./pages/error/error";
+import Layout from "./layout/Layout";
+import { CategoryDataProvider } from "./context/CategoryContext";
+import { FeaturedDataProvider } from "./context/FeaturedContext";
 
 function App() {
   const location = useLocation();
@@ -25,31 +30,47 @@ function App() {
   }, [location]);
 
   return (
-    <>
-      <Navbar />
-      <Routes>
-        <Route element={<Home />} path="/" />
-        <Route element={<Destination />} path="/destination" />
-        <Route
-          element={<DestinationDetailsPage />}
-          path="/destination-details"
-        />
-        <Route element={<TourPage />} path="/tour" />
-        <Route element={<TourDetailsPage />} path="/tour-details" />
-
-        <Route element={<AboutPage />} path="/about" />
-
-        <Route element={<TeamPage />} path="/team" />
-        <Route element={<TeamDetailsPage />} path="/team-details" />
-        <Route element={<GalleryPage />} path="/gallery" />
-
-        <Route element={<BlogPage />} path="/blog" />
-        <Route element={<BlogDetailsPage />} path="/blog-details" />
-        <Route element={<ContactPage />} path="/contact" />
-        <Route element={<Error />} path="*" />
-      </Routes>
-      <FooterArea />
-    </>
+    <FeaturedDataProvider>
+      <CategoryDataProvider>
+        <MenuDataProvider>
+          <CompanyDataProvider>
+            <SocialDataProvider>
+              <GalleryDataProvider>
+                <Routes>
+                  <Route path="/" element={<Layout />}>
+                    <Route index element={<Home />} />
+                    <Route element={<Destination />} path="/destination" />
+                    <Route
+                      element={<DestinationDetailsPage />}
+                      path="/destination-details/:id"
+                    />
+                    <Route element={<TourPage />} path="/packages" />
+                    <Route
+                      element={<TourDetailsPage />}
+                      path="/package-details/:id"
+                    />
+                    <Route element={<AboutPage />} path="/about-us" />
+                    <Route element={<TeamPage />} path="/team" />
+                    <Route
+                      element={<TeamDetailsPage />}
+                      path="/team-details/:id"
+                    />
+                    <Route element={<GalleryPage />} path="/gallery" />
+                    <Route element={<BlogPage />} path="/blogs" />
+                    <Route
+                      element={<BlogDetailsPage />}
+                      path="/blog-details/:id"
+                    />
+                    <Route element={<ContactPage />} path="/contact-us" />
+                    <Route element={<Error />} path="*" />
+                  </Route>
+                </Routes>
+              </GalleryDataProvider>
+            </SocialDataProvider>
+          </CompanyDataProvider>
+        </MenuDataProvider>
+      </CategoryDataProvider>
+    </FeaturedDataProvider>
   );
 }
 

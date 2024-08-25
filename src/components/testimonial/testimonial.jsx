@@ -1,9 +1,13 @@
 import Slider from "react-slick";
-
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useEffect, useState, useCallback } from "react";
+import axios from "axios";
+import { baseUrl } from "../../api/api";
 
 const Testimonial = () => {
+  const [testimonialData, setTestimonialData] = useState([]);
+
   const settings = {
     dots: false,
     infinite: true,
@@ -14,6 +18,19 @@ const Testimonial = () => {
     slidesToShow: 3,
     slidesToScroll: 1,
   };
+
+  const fetchTestimonialData = useCallback(async () => {
+    try {
+      const response = await axios.get(`${baseUrl}/message`);
+      setTestimonialData(response.data.rows);
+    } catch (error) {
+      console.error("Error fetching slider data:", error);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchTestimonialData();
+  }, [fetchTestimonialData]);
 
   return (
     <>
@@ -36,135 +53,38 @@ const Testimonial = () => {
                   <span className="dots" />
                 </span>
               </span>
-              <h2 className="sec-title">What Customer Say About Us</h2>
+              <h2 className="sec-title">What Customers Say About Us</h2>
             </div>
-            <div
-              className="row slider-shadow ot-carousel"
-              id="testiSlide1"
-              //   data-slide-show={3}
-              //   data-lg-slide-show={2}
-              //   data-md-slide-show={2}
-              //   data-sm-slide-show={1}
-            >
+            <div className="row slider-shadow ot-carousel" id="testiSlide1">
               <Slider {...settings}>
-                <div className="col-lg-6 p-3">
-                  <div className="testi-card">
-                    <div className="testi-card__rating">
-                      <i className="fa-solid fa-star-sharp" />
-                      <i className="fa-solid fa-star-sharp" />
-                      <i className="fa-solid fa-star-sharp" />
-                      <i className="fa-solid fa-star-sharp" />
-                      <i className="fa-solid fa-star-sharp" />
-                    </div>
-                    <p className="testi-card__text">
-                      “Objectively deploy open-source web-readiness impactful
-                      bandwidth. Compellingly coordinate business deliverables
-                      rather equity invested technologies. Phosfluorescently
-                      reinvent.”
-                    </p>
-                    <div className="testi-card__profile">
-                      <div className="testi-card__avater">
-                        <img
-                          src="/src/assets/img/testimonial/testi_1_1.jpg"
-                          alt="Avater"
-                        />
+                {testimonialData.map((data, index) => (
+                  <div className="col-lg-6 p-3" key={index}>
+                    <div className="testi-card">
+                      <div className="testi-card__rating">
+                        <i className="fa-solid fa-star-sharp" />
+                        <i className="fa-solid fa-star-sharp" />
+                        <i className="fa-solid fa-star-sharp" />
+                        <i className="fa-solid fa-star-sharp" />
+                        <i className="fa-solid fa-star-sharp" />
                       </div>
-                      <div className="media-body">
-                        <h3 className="testi-card__name">Mary Cruzleen</h3>
-                        <span className="testi-card__desig">
-                          CEO of Maithon
-                        </span>
+                      <p className="testi-card__text">“{data.comment}”</p>
+                      <div className="testi-card__profile">
+                        <div className="testi-card__avater">
+                          <img
+                            src="/src/assets/img/testimonial/testi_1_4.jpg"
+                            alt="Avater"
+                          />
+                        </div>
+                        <div className="media-body">
+                          <h3 className="testi-card__name">{data.name}</h3>
+                          {/* <span className="testi-card__desig">
+                            CEO at Travon
+                          </span> */}
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div className="col-lg-6 p-3">
-                  <div className="testi-card">
-                    <div className="testi-card__rating">
-                      <i className="fa-solid fa-star-sharp" />
-                      <i className="fa-solid fa-star-sharp" />
-                      <i className="fa-solid fa-star-sharp" />
-                      <i className="fa-solid fa-star-sharp" />
-                      <i className="fa-solid fa-star-sharp" />
-                    </div>
-                    <p className="testi-card__text">
-                      “Objectively deploy open-source web-readiness impactful
-                      bandwidth. Compellingly coordinate business deliverables
-                      rather equity invested technologies. Phosfluorescently
-                      reinvent.”
-                    </p>
-                    <div className="testi-card__profile">
-                      <div className="testi-card__avater">
-                        <img
-                          src="/src/assets/img/testimonial/testi_1_2.jpg"
-                          alt="Avater"
-                        />
-                      </div>
-                      <div className="media-body">
-                        <h3 className="testi-card__name">David Milton</h3>
-                        <span className="testi-card__desig">CEO of Gazal</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-lg-6 p-3">
-                  <div className="testi-card">
-                    <div className="testi-card__rating">
-                      <i className="fa-solid fa-star-sharp" />
-                      <i className="fa-solid fa-star-sharp" />
-                      <i className="fa-solid fa-star-sharp" />
-                      <i className="fa-solid fa-star-sharp" />
-                      <i className="fa-solid fa-star-sharp" />
-                    </div>
-                    <p className="testi-card__text">
-                      “Objectively deploy open-source web-readiness impactful
-                      bandwidth. Compellingly coordinate business deliverables
-                      rather equity invested technologies. Phosfluorescently
-                      reinvent.”
-                    </p>
-                    <div className="testi-card__profile">
-                      <div className="testi-card__avater">
-                        <img
-                          src="/src/assets/img/testimonial/testi_1_3.jpg"
-                          alt="Avater"
-                        />
-                      </div>
-                      <div className="media-body">
-                        <h3 className="testi-card__name">Abraham Khalil</h3>
-                        <span className="testi-card__desig">CEO Adivaha</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-lg-6 p-3">
-                  <div className="testi-card">
-                    <div className="testi-card__rating">
-                      <i className="fa-solid fa-star-sharp" />
-                      <i className="fa-solid fa-star-sharp" />
-                      <i className="fa-solid fa-star-sharp" />
-                      <i className="fa-solid fa-star-sharp" />
-                      <i className="fa-solid fa-star-sharp" />
-                    </div>
-                    <p className="testi-card__text">
-                      “Objectively deploy open-source web-readiness impactful
-                      bandwidth. Compellingly coordinate business deliverables
-                      rather equity invested technologies. Phosfluorescently
-                      reinvent.”
-                    </p>
-                    <div className="testi-card__profile">
-                      <div className="testi-card__avater">
-                        <img
-                          src="/src/assets/img/testimonial/testi_1_4.jpg"
-                          alt="Avater"
-                        />
-                      </div>
-                      <div className="media-body">
-                        <h3 className="testi-card__name">Pisoori Janu</h3>
-                        <span className="testi-card__desig">CEO at Travon</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                ))}
               </Slider>
             </div>
           </div>

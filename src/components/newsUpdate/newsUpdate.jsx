@@ -1,7 +1,10 @@
 import Slider from "react-slick";
-
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { baseUrl } from "../../api/api";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { Link } from "react-router-dom";
 
 const NewsUpdate = () => {
   const settings = {
@@ -14,6 +17,37 @@ const NewsUpdate = () => {
     slidesToShow: 3,
     slidesToScroll: 1,
   };
+  const [newsContent, setNewsContent] = useState([]);
+  const [newsComponent, setNewsComponent] = useState([]);
+
+  useEffect(() => {
+    fetchNewsContent();
+    fetchNewsComponents();
+  }, []);
+
+  const fetchNewsContent = async () => {
+    try {
+      const response = await axios.get(`${baseUrl}/content`);
+      const data = await response.data;
+      const newsContent = data.filter((content) => content.id === 22);
+      setNewsContent(newsContent);
+    } catch (error) {
+      console.error("Error fetching company data:", error);
+    }
+  };
+
+  const fetchNewsComponents = async () => {
+    try {
+      const response = await axios.get(`${baseUrl}/component`);
+      const data = await response.data;
+      const newsComponents = data
+        .filter((component) => component.content === "22")
+        .slice(0, 4);
+      setNewsComponent(newsComponents);
+    } catch (error) {
+      console.error("Error fetching company data:", error);
+    }
+  };
 
   return (
     <>
@@ -21,18 +55,23 @@ const NewsUpdate = () => {
         <div className="container">
           <div className="row justify-content-lg-between justify-content-center align-items-end">
             <div className="col-lg-8 mb-n2 mb-lg-0">
-              <div className="title-area text-center text-lg-start">
-                <span className="sub-title justify-content-center justify-content-lg-start">
-                  <span className="shape left d-inline-block d-lg-none">
-                    <span className="dots" />
+              {newsContent?.map((content, index) => (
+                <div
+                  className="title-area text-center text-lg-start"
+                  key={index}
+                >
+                  <span className="sub-title justify-content-center justify-content-lg-start">
+                    <span className="shape left d-inline-block d-lg-none">
+                      <span className="dots" />
+                    </span>
+                    {content.heading}
+                    <span className="shape right">
+                      <span className="dots" />
+                    </span>
                   </span>
-                  News &amp; Updates
-                  <span className="shape right">
-                    <span className="dots" />
-                  </span>
-                </span>
-                <h2 className="sec-title">Our Latest News &amp; Articles</h2>
-              </div>
+                  <h2 className="sec-title">{content.sub_heading}</h2>
+                </div>
+              ))}
             </div>
             <div className="col-auto">
               <div className="sec-btn">
@@ -51,122 +90,38 @@ const NewsUpdate = () => {
             data-arrows="true"
           >
             <Slider {...settings}>
-              <div className="col-md-6 col-xl-4 p-3">
-                <div className="blog-card">
-                  <div className="blog-img">
-                    <img
-                      src="/src/assets/img/blog/blog_1_1.jpg"
-                      alt="blog image"
-                    />
-                  </div>
-                  <div className="blog-content">
-                    <div className="blog-meta">
-                      <a href="blog.html">
-                        <i className="fas fa-calendar-days" />
-                        15 July, 2023
-                      </a>
-                      <a href="blog.html">
-                        <i className="fas fa-tags" /> Mountain
-                      </a>
+              {newsComponent?.map((comp, index) => (
+                <div className="col-md-6 col-xl-4 p-3" key={index}>
+                  <div className="blog-card">
+                    <div className="blog-img">
+                      <img src={comp.url} alt="blog image" />
                     </div>
-                    <h3 className="blog-title box-title">
-                      <a href="blog-details.html">
-                        Get Tips For Making the Most of Your Summer
-                      </a>
-                    </h3>
-                    <a href="blog-details.html" className="link-btn">
-                      Read More <i className="fas fa-arrow-up-right" />
-                    </a>
+                    <div className="blog-content">
+                      <div className="blog-meta">
+                        <a href="blog.html">
+                          <i className="fas fa-calendar-days" />
+                          {comp.sub_title}
+                        </a>
+                        <a href="blog.html">
+                          <i className="fas fa-tags" />
+                          {comp.sub_heading}
+                        </a>
+                      </div>
+                      <h3 className="blog-title box-title">
+                        <Link to={`/blog-details/${comp.id}`}>
+                          {comp.title}
+                        </Link>
+                      </h3>
+                      <Link
+                        to={`/blog-details/${comp.id}`}
+                        className="link-btn"
+                      >
+                        Read More <i className="fas fa-arrow-up-right" />
+                      </Link>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div className="col-md-6 col-xl-4 p-3">
-                <div className="blog-card">
-                  <div className="blog-img">
-                    <img
-                      src="/src/assets/img/blog/blog_1_2.jpg"
-                      alt="blog image"
-                    />
-                  </div>
-                  <div className="blog-content">
-                    <div className="blog-meta">
-                      <a href="blog.html">
-                        <i className="fas fa-calendar-days" />
-                        16 July, 2023
-                      </a>
-                      <a href="blog.html">
-                        <i className="fas fa-tags" /> Parasailing
-                      </a>
-                    </div>
-                    <h3 className="blog-title box-title">
-                      <a href="blog-details.html">
-                        Top 15 Holiday Can Enjoy in India Trips
-                      </a>
-                    </h3>
-                    <a href="blog-details.html" className="link-btn">
-                      Read More <i className="fas fa-arrow-up-right" />
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-6 col-xl-4 p-3">
-                <div className="blog-card">
-                  <div className="blog-img">
-                    <img
-                      src="/src/assets/img/blog/blog_1_3.jpg"
-                      alt="blog image"
-                    />
-                  </div>
-                  <div className="blog-content">
-                    <div className="blog-meta">
-                      <a href="blog.html">
-                        <i className="fas fa-calendar-days" />
-                        17 July, 2023
-                      </a>
-                      <a href="blog.html">
-                        <i className="fas fa-tags" /> Lake View
-                      </a>
-                    </div>
-                    <h3 className="blog-title box-title">
-                      <a href="blog-details.html">
-                        The Impact of Covid-19 on Tour Industry
-                      </a>
-                    </h3>
-                    <a href="blog-details.html" className="link-btn">
-                      Read More <i className="fas fa-arrow-up-right" />
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-6 col-xl-4 p-3">
-                <div className="blog-card">
-                  <div className="blog-img">
-                    <img
-                      src="/src/assets/img/blog/blog_1_4.jpg"
-                      alt="blog image"
-                    />
-                  </div>
-                  <div className="blog-content">
-                    <div className="blog-meta">
-                      <a href="blog.html">
-                        <i className="fas fa-calendar-days" />
-                        18 July, 2023
-                      </a>
-                      <a href="blog.html">
-                        <i className="fas fa-tags" /> Newyork City
-                      </a>
-                    </div>
-                    <h3 className="blog-title box-title">
-                      <a href="blog-details.html">
-                        Five Ways to Get Best Photos On Picnic Spot
-                      </a>
-                    </h3>
-                    <a href="blog-details.html" className="link-btn">
-                      Read More <i className="fas fa-arrow-up-right" />
-                    </a>
-                  </div>
-                </div>
-              </div>
+              ))}
             </Slider>
           </div>
         </div>

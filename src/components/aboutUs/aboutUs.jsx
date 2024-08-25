@@ -26,7 +26,6 @@ export const AboutUs = () => {
   const fetchJourneyComponents = async () => {
     try {
       const response = await axios.get(`${baseUrl}/component`);
-      console.log(response.data);
       const data = await response.data;
       const homeComponents = data.filter(
         (component) => component.content === "13"
@@ -48,26 +47,20 @@ export const AboutUs = () => {
                   <div className="img1">
                     <img src={data.url} alt="About" />
                   </div>
-                  {/* <div className="img2">
-                    <img
-                      src="/src/assets/img/normal/about_1_2.jpg"
-                      alt="About"
-                    />
-                  </div> */}
-                  <div className="shape1">
-                    <img
-                      src="/src/assets/img/normal/about_shape_1.svg"
-                      alt="shape"
-                    />
-                  </div>
                 </div>
               </div>
 
               <div className="col-xl-6 pe-xl-4">
                 <div className="title-area mb-35">
+                  <span className="sub-title">
+                    {data.sub_heading}
+                    <span className="shape right">
+                      <span className="dots"></span>
+                    </span>
+                  </span>
                   <h2 className="sec-title">{data.heading}</h2>
                 </div>
-                <p className="mt-n2 mb-35">{data.sub_heading}</p>
+                <p className="mt-n2 mb-35">{data.sub_title}</p>
                 <div className="about-media-wrap">
                   {journeyComponent.map((data, index) => (
                     <div className="about-media" key={index}>
@@ -87,38 +80,6 @@ export const AboutUs = () => {
                   <Link to={data.link} className="ot-btn">
                     {data.button}
                   </Link>
-                  {/* <div className="customer-avater-wrap">
-                    <div className="customer-avater-group">
-                      <div className="customer-avater">
-                        <img
-                          src="/src/assets/img/normal/avater_1_1.jpg"
-                          alt="avater"
-                        />
-                      </div>
-                      <div className="customer-avater">
-                        <img
-                          src="/src/assets/img/normal/avater_1_2.jpg"
-                          alt="avater"
-                        />
-                      </div>
-                      <div className="customer-avater">
-                        <img
-                          src="/src/assets/img/normal/avater_1_3.jpg"
-                          alt="avater"
-                        />
-                      </div>
-                      <div className="customer-avater">
-                        <img
-                          src="/src/assets/img/normal/avater_1_4.jpg"
-                          alt="avater"
-                        />
-                      </div>
-                    </div>
-                    <p className="mb-0">
-                      <span className="text-theme fs-md fw-bold">500k+</span>{" "}
-                      Happy Customer
-                    </p>
-                  </div> */}
                 </div>
               </div>
             </div>
@@ -128,3 +89,5 @@ export const AboutUs = () => {
     </div>
   );
 };
+
+export default AboutUs;
